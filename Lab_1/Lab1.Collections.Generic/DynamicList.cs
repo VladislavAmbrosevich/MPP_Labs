@@ -1,6 +1,7 @@
 ﻿using System;
 using System.Collections;
 using System.Collections.Generic;
+using System.Threading;
 
 namespace Lab1.Collections.Generic
 {
@@ -11,6 +12,26 @@ namespace Lab1.Collections.Generic
         private const int DefaultCapacity = 4;
 
         private T[] _items;
+
+        [NonSerialized]
+        private object _syncRoot;
+
+
+        object ICollection.SyncRoot
+        {
+            get
+            {
+                if (_syncRoot == null)
+                {
+                    Interlocked.CompareExchange<object>(ref _syncRoot, new object(), null);
+                }
+
+                return _syncRoot;
+            }
+        }
+
+
+        bool ICollection.IsSynchronized => false;
 
 
         public int Count { get; private set; }
@@ -139,6 +160,22 @@ namespace Lab1.Collections.Generic
             }
             Array.Clear(_items, 0, Count);
             Count = 0;
+        }
+
+        public void CopyTo(Array array, int arrayIndex)
+        {
+            if (array != null && array.Rank != 1)
+            {
+                throw new ArgumentException(nameof(array.Rank));
+            }
+            try
+            {
+                Array.Copy(_items, 0, array, arrayIndex, Count);
+            }
+            catch (ArrayTypeMismatchException)
+            {
+                throw new ArgumentException(nameof(array));
+            }
         }
 
 

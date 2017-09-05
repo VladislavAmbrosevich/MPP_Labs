@@ -1,4 +1,5 @@
 ﻿using System;
+using System.Collections;
 using System.Collections.Generic;
 using System.Linq;
 using System.Text;
@@ -6,10 +7,8 @@ using System.Threading.Tasks;
 
 namespace Lab1.Collections.Generic
 {
-    public interface IDynamicList<T> : IEnumerable<T>
+    public interface IDynamicList<T> : IEnumerable<T>, ICollection
     {
-        int Count { get; }
-
         int Capacity { get; set; }
 
         T this[int index] { get; set; }
