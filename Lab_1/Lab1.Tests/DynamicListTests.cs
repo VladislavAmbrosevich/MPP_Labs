@@ -62,5 +62,15 @@ namespace Lab1.Tests
 
             Assert.AreEqual(0, actualList.Count);
         }
+
+        [TestMethod]
+        public void TestItemByIndex()
+        {
+            var actualList = new DynamicList<int> { 1, 2, 3, 4, 5 };
+
+            var item = actualList[2];
+
+            Assert.AreEqual(3, item);
+        }
     }
 }

@@ -30,7 +30,6 @@ namespace Lab1.Collections.Generic
             }
         }
 
-
         bool ICollection.IsSynchronized => false;
 
 
