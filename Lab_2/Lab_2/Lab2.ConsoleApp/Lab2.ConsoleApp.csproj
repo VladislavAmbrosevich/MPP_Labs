@@ -4,10 +4,10 @@
   <PropertyGroup>
     <Configuration Condition=" '$(Configuration)' == '' ">Debug</Configuration>
     <Platform Condition=" '$(Platform)' == '' ">AnyCPU</Platform>
-    <ProjectGuid>{D39E66F3-DE1D-4C23-A374-45E2E145E626}</ProjectGuid>
+    <ProjectGuid>{EDB4BC29-4DC4-4E41-88E5-F4C5831CCFED}</ProjectGuid>
     <OutputType>Exe</OutputType>
-    <RootNamespace>MainProject</RootNamespace>
-    <AssemblyName>MainProject</AssemblyName>
+    <RootNamespace>Lab2.ConsoleApp</RootNamespace>
+    <AssemblyName>Lab2.ConsoleApp</AssemblyName>
     <TargetFrameworkVersion>v4.5.2</TargetFrameworkVersion>
     <FileAlignment>512</FileAlignment>
     <AutoGenerateBindingRedirects>true</AutoGenerateBindingRedirects>
@@ -47,6 +47,12 @@
   </ItemGroup>
   <ItemGroup>
     <None Include="App.config" />
+  </ItemGroup>
+  <ItemGroup>
+    <ProjectReference Include="..\Lab2.Threading\Lab2.Threading.csproj">
+      <Project>{772cad8d-f306-452c-8317-f9d9bbd00852}</Project>
+      <Name>Lab2.Threading</Name>
+    </ProjectReference>
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
 </Project>
