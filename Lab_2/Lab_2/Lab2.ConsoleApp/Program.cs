@@ -16,7 +16,7 @@ namespace Lab2.ConsoleApp
 
         public static void TestMethodWithoutMutex()
         {
-            var name = Thread.CurrentThread.Name;
+            var name = $"Thread_{Thread.CurrentThread.ManagedThreadId}";
             Console.WriteLine($"{name} start method");
             for (var i = 0; i < RepeatsCount; i++)
             {
@@ -27,7 +27,7 @@ namespace Lab2.ConsoleApp
 
         public static void TestMethodWithMutex()
         {
-            var name = Thread.CurrentThread.Name;
+            var name = $"Thread_{Thread.CurrentThread.ManagedThreadId}";
             Mutex.Lock();
             Console.WriteLine($"{name} start method");
             for (var i = 0; i < RepeatsCount; i++)
@@ -41,11 +41,11 @@ namespace Lab2.ConsoleApp
 
         private static void Main()
         {
-            var threadPool = new ThreadPool(ThreadsInPoolCount, true);
+            var threadPool = new ThreadPool(ThreadsInPoolCount);
 
-            //threadPool.EnqueueTask(TestMethodWithoutMutex);
-            //threadPool.EnqueueTask(TestMethodWithoutMutex);
-            //threadPool.EnqueueTask(TestMethodWithoutMutex);
+//            threadPool.EnqueueTask(TestMethodWithoutMutex);
+//            threadPool.EnqueueTask(TestMethodWithoutMutex);
+//            threadPool.EnqueueTask(TestMethodWithoutMutex);
 
             threadPool.EnqueueTask(TestMethodWithMutex);
             threadPool.EnqueueTask(TestMethodWithMutex);

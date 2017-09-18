@@ -1,4 +1,5 @@
-﻿using System.Collections.Generic;
+﻿using System;
+using System.Collections.Generic;
 using System.Threading;
 
 namespace Lab2.Threading
@@ -8,29 +9,30 @@ namespace Lab2.Threading
 
     public class ThreadPool
     {
+        private const int MaxThreadsCount = 100;
+
         private readonly Thread[] _threadPool;
         private readonly Queue<TaskDelegate> _tasksQueue;
         private readonly object _syncRoot = new object();
 
 
         public ThreadPool(int threadsCount)
-            : this(threadsCount, false)
         {
+            if (threadsCount <= 0)
+            {
+                throw new ArgumentException(nameof(threadsCount));
+            }
+            if (threadsCount > MaxThreadsCount)
+            {
+                threadsCount = MaxThreadsCount;
+            }
 
-        }
-
-        public ThreadPool(int threadsCount, bool withNames)
-        {
             _threadPool = new Thread[threadsCount];
             _tasksQueue = new Queue<TaskDelegate>();
 
             for (var i = 0; i < threadsCount; i++)
             {
                 _threadPool[i] = new Thread(QueueProcessing);
-                if (withNames)
-                {
-                    _threadPool[i].Name = $"Thread_{i}";
-                }
                 _threadPool[i].Start();
             }
         }
@@ -66,7 +68,7 @@ namespace Lab2.Threading
                     }
                     task = _tasksQueue.Dequeue();
                 }
-                task.Invoke();
+                task?.Invoke();
             }
         }
     }
