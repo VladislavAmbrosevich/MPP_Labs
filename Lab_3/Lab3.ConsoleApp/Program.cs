@@ -11,7 +11,7 @@ namespace Lab3.ConsoleApp
     internal class Program
     {
         private const string SrcPath = "./Src";
-        private const string DestPath = "./Dest2";
+        private const string DestPath = "./Dest1";
 
 
         private static void Main(string[] args)
