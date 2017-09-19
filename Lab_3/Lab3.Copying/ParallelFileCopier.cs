@@ -6,7 +6,7 @@ namespace Lab3.Copying
 {
     public static class ParallelFileCopier
     {
-        private static int _notYetCompletedThreadsCount;
+        private static int _notYetCompletedThreadsCount = 1;
         private static ManualResetEvent _doneEvent = new ManualResetEvent(false);
 
 
@@ -14,7 +14,7 @@ namespace Lab3.Copying
         {
             if (!Directory.Exists(destPath))
             {
-                CreateDirectory(destPath);
+                Directory.CreateDirectory(destPath);
             }
             else
             {
@@ -43,6 +43,11 @@ namespace Lab3.Copying
                 ThreadPool.QueueUserWorkItem(CopyFile, new FileCopyingParams { SrcPath = file, DestPath = file.Replace(srcPath, destPath)});
                 copiedFilesCount++;
             }
+
+            if (Interlocked.Decrement(ref _notYetCompletedThreadsCount) == 0)
+            {
+                _doneEvent.Set();
+            }
             _doneEvent.WaitOne();
 
             return copiedFilesCount;
@@ -53,7 +58,7 @@ namespace Lab3.Copying
         {
             try
             {
-                var copiedParams = (FileCopyingParams)fileCopyingParams;
+                var copiedParams = (FileCopyingParams) fileCopyingParams;
                 var srcPath = copiedParams.SrcPath;
                 var destPath = copiedParams.DestPath;
                 File.Copy(srcPath, destPath, true);
@@ -61,7 +66,9 @@ namespace Lab3.Copying
             finally
             {
                 if (Interlocked.Decrement(ref _notYetCompletedThreadsCount) == 0)
+                {
                     _doneEvent.Set();
+                }
             }
         }
 
@@ -71,12 +78,14 @@ namespace Lab3.Copying
         {
             try
             {
-                Directory.CreateDirectory((string)destPath);
+                Directory.CreateDirectory((string) destPath);
             }
             finally
             {
                 if (Interlocked.Decrement(ref _notYetCompletedThreadsCount) == 0)
+                {
                     _doneEvent.Set();
+                }
             }
         }
 
