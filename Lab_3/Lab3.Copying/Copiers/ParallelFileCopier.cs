@@ -1,35 +1,17 @@
-﻿using System.DirectoryServices.Protocols;
-using System.IO;
+﻿using System.IO;
 using System.Threading;
 
-namespace Lab3.Copying
+namespace Lab3.Copying.Copiers
 {
-    public static class ParallelFileCopier
+    public class ParallelFileCopier : FileCopier
     {
         private static int _notYetCompletedThreadsCount = 1;
-        private static ManualResetEvent _doneEvent = new ManualResetEvent(false);
+        private static readonly ManualResetEvent DoneEvent = new ManualResetEvent(false);
 
 
-        public static int DeepCopying(string srcPath, string destPath, bool overRide)
+        public override int CopyRecursive(string srcPath, string destPath)
         {
-            if (!Directory.Exists(destPath))
-            {
-                Directory.CreateDirectory(destPath);
-            }
-            else
-            {
-                if (overRide)
-                {
-                    Directory.Delete(destPath, true);
-                }
-                else
-                {
-                    throw new DirectoryException(nameof(destPath));
-                }
-            }
-
-
-            foreach (var directory in Directory.GetDirectories(srcPath, "*.*", System.IO.SearchOption.AllDirectories))
+            foreach (var directory in Directory.GetDirectories(srcPath, FileCopier.AnyFile, SearchOption.AllDirectories))
             {
                 Interlocked.Increment(ref _notYetCompletedThreadsCount);
                 ThreadPool.QueueUserWorkItem(CreateDirectory, directory.Replace(srcPath, destPath));
@@ -37,18 +19,17 @@ namespace Lab3.Copying
 
             var copiedFilesCount = 0;
 
-            foreach (var file in Directory.GetFiles(srcPath, "*.*", System.IO.SearchOption.AllDirectories))
+            foreach (var file in Directory.GetFiles(srcPath, FileCopier.AnyFile, SearchOption.AllDirectories))
             {
                 Interlocked.Increment(ref _notYetCompletedThreadsCount);
                 ThreadPool.QueueUserWorkItem(CopyFile, new FileCopyingParams { SrcPath = file, DestPath = file.Replace(srcPath, destPath)});
                 copiedFilesCount++;
             }
-
             if (Interlocked.Decrement(ref _notYetCompletedThreadsCount) == 0)
             {
-                _doneEvent.Set();
+                DoneEvent.Set();
             }
-            _doneEvent.WaitOne();
+            DoneEvent.WaitOne();
 
             return copiedFilesCount;
         }
@@ -67,12 +48,10 @@ namespace Lab3.Copying
             {
                 if (Interlocked.Decrement(ref _notYetCompletedThreadsCount) == 0)
                 {
-                    _doneEvent.Set();
+                    DoneEvent.Set();
                 }
             }
         }
-
-
 
         private static void CreateDirectory(object destPath)
         {
@@ -84,17 +63,9 @@ namespace Lab3.Copying
             {
                 if (Interlocked.Decrement(ref _notYetCompletedThreadsCount) == 0)
                 {
-                    _doneEvent.Set();
+                    DoneEvent.Set();
                 }
             }
-        }
-
-
-
-        private class FileCopyingParams
-        {
-            public string SrcPath { get; set; }
-            public string DestPath { get; set; }
         }
     }
 }
