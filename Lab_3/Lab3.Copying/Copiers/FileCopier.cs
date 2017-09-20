@@ -42,20 +42,17 @@ namespace Lab3.Copying.Copiers
 
         private static void ProcessDestinationDirectoryPath(string destPath, bool overwrite)
         {
-            if (Directory.Exists(destPath))
+            if (!Directory.Exists(destPath))
             {
-                if (overwrite)
-                {
-                    Directory.Delete(destPath, true);
-                }
-                else
-                {
-                    throw new DirectoryException($"{destPath}: Directory with this name already exists.");
-                }
+                return;
+            }
+            if (overwrite)
+            {
+                Directory.Delete(destPath, true);
             }
             else
             {
-                Directory.CreateDirectory(destPath);
+                throw new DirectoryException($"{destPath}: Directory with this name already exists.");
             }
         }
     }

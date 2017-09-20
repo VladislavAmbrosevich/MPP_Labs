@@ -70,7 +70,7 @@ namespace Lab3.ConsoleApp
                             _fileCopier = new ParallelFileCopier();
                             break;
                         case 'c':
-                            _fileCopier = new ParallelFileCopier();
+                            _fileCopier = new CustomThreadPoolBasedParallelFileCopier();
                             break;
                     }
                     break;
