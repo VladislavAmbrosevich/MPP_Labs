@@ -48,5 +48,11 @@
   <ItemGroup>
     <None Include="App.config" />
   </ItemGroup>
+  <ItemGroup>
+    <ProjectReference Include="..\Lab4.OSHandling\Lab4.OSHandling.csproj">
+      <Project>{a156b224-4332-420d-bf26-acbd3fa3541b}</Project>
+      <Name>Lab4.OSHandling</Name>
+    </ProjectReference>
+  </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
 </Project>
