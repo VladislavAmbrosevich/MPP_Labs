@@ -17,6 +17,12 @@ namespace Lab4.OSHandling
         }
 
 
+        ~OsHandle()
+        {
+            Dispose(false);
+        }
+
+
         public void Dispose()
         {
             Dispose(true);
@@ -36,12 +42,6 @@ namespace Lab4.OSHandling
                 // Set large fields to null.
                 _disposed = true;
             }
-        }
-
-
-        ~OsHandle()
-        {
-            Dispose(false);
         }
     }
 }
