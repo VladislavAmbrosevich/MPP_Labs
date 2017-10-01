@@ -32,6 +32,7 @@ namespace Lab4.OSHandling
                 {
                     // Release managed resources.
                     ManagedObject.Dispose();
+                    Handle = IntPtr.Zero;
                 }
                 // Release unmanaged resources.
                 if (Handle != IntPtr.Zero)
