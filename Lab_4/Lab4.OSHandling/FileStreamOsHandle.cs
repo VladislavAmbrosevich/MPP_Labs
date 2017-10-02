@@ -12,8 +12,8 @@ namespace Lab4.OSHandling
         public delegate FileStream FileStreamReceiveDelegate();
 
 
-        public sealed override FileStream ManagedObject { get; protected set; }
-        public sealed override IntPtr Handle { get; protected set; }
+        public FileStream ManagedObject { get; protected set; }
+        public IntPtr Handle { get; protected set; }
 
 
         public FileStreamOsHandle(FileStreamReceiveDelegate expression)
@@ -27,7 +27,7 @@ namespace Lab4.OSHandling
         protected override void ReleaseHandle()
         {
             Marshal.FreeCoTaskMem(Handle);
-            base.ReleaseHandle();
+            Handle = IntPtr.Zero;
         }
 
         protected override void Dispose(bool disposing)

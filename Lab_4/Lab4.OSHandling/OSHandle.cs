@@ -7,10 +7,6 @@ namespace Lab4.OSHandling
         private bool _disposed;
 
 
-        public virtual IntPtr Handle { get; protected set; }
-        public virtual T ManagedObject { get; protected set; }
-
-
         protected OsHandle()
         {
             _disposed = false;
@@ -30,14 +26,7 @@ namespace Lab4.OSHandling
         }
 
 
-        protected virtual void ReleaseHandle()
-        {
-            if (Handle != IntPtr.Zero)
-            {
-                Handle = IntPtr.Zero;
-            }
-        }
-
+        protected abstract void ReleaseHandle();
 
         protected virtual void Dispose(bool disposing)
         {
