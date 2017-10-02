@@ -24,6 +24,12 @@ namespace Lab4.OSHandling
         }
 
 
+        protected override void ReleaseHandle()
+        {
+            Marshal.FreeCoTaskMem(Handle);
+            base.ReleaseHandle();
+        }
+
         protected override void Dispose(bool disposing)
         {
             if (!_disposed)
@@ -35,11 +41,7 @@ namespace Lab4.OSHandling
                     Handle = IntPtr.Zero;
                 }
                 // Release unmanaged resources.
-                if (Handle != IntPtr.Zero)
-                {
-                    Marshal.FreeCoTaskMem(Handle);
-                    Handle = IntPtr.Zero;
-                }
+                ReleaseHandle();
                 _disposed = true;
             }
             base.Dispose(disposing);

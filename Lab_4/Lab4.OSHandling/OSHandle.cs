@@ -30,6 +30,15 @@ namespace Lab4.OSHandling
         }
 
 
+        protected virtual void ReleaseHandle()
+        {
+            if (Handle != IntPtr.Zero)
+            {
+                Handle = IntPtr.Zero;
+            }
+        }
+
+
         protected virtual void Dispose(bool disposing)
         {
             if (!_disposed)
@@ -40,6 +49,7 @@ namespace Lab4.OSHandling
                 }
                 // Free your own state (unmanaged objects).
                 // Set large fields to null.
+                ReleaseHandle();
                 _disposed = true;
             }
         }
