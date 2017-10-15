@@ -4,15 +4,16 @@
   <PropertyGroup>
     <Configuration Condition=" '$(Configuration)' == '' ">Debug</Configuration>
     <Platform Condition=" '$(Platform)' == '' ">AnyCPU</Platform>
-    <ProjectGuid>{88F6C2C2-7942-4EF0-8339-F70200D4CC89}</ProjectGuid>
-    <OutputType>Library</OutputType>
-    <AppDesignerFolder>Properties</AppDesignerFolder>
-    <RootNamespace>Lab5_1.Serialization</RootNamespace>
-    <AssemblyName>Lab5_1.Serialization</AssemblyName>
+    <ProjectGuid>{8AD91CFD-2DF2-4229-9576-E620A69EF410}</ProjectGuid>
+    <OutputType>Exe</OutputType>
+    <RootNamespace>Lab5_1.ConsoleApp</RootNamespace>
+    <AssemblyName>Lab5_1.ConsoleApp</AssemblyName>
     <TargetFrameworkVersion>v4.6.2</TargetFrameworkVersion>
     <FileAlignment>512</FileAlignment>
+    <AutoGenerateBindingRedirects>true</AutoGenerateBindingRedirects>
   </PropertyGroup>
   <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Debug|AnyCPU' ">
+    <PlatformTarget>AnyCPU</PlatformTarget>
     <DebugSymbols>true</DebugSymbols>
     <DebugType>full</DebugType>
     <Optimize>false</Optimize>
@@ -22,6 +23,7 @@
     <WarningLevel>4</WarningLevel>
   </PropertyGroup>
   <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Release|AnyCPU' ">
+    <PlatformTarget>AnyCPU</PlatformTarget>
     <DebugType>pdbonly</DebugType>
     <Optimize>true</Optimize>
     <OutputPath>bin\Release\</OutputPath>
@@ -40,26 +42,21 @@
     <Reference Include="System.Xml" />
   </ItemGroup>
   <ItemGroup>
-    <Compile Include="AssemblyXmlSerializer.cs" />
-    <Compile Include="TypeInfo.cs" />
-    <Compile Include="TypeMembersDescriptions\ConstructorDescription.cs" />
-    <Compile Include="TypeMembersDescriptions\DelegateDescription.cs" />
-    <Compile Include="TypeMembersDescriptions\EventDescription.cs" />
-    <Compile Include="TypeMembersDescriptions\FieldDescription.cs" />
-    <Compile Include="TypeMembersDescriptions\PropertyDescription.cs" />
-    <Compile Include="TypeParser.cs" />
-    <Compile Include="Interfaces\IAssemblyXmlSerializer.cs" />
-    <Compile Include="Interfaces\ITypeInfo.cs" />
-    <Compile Include="TypeMembersDescriptions\MethodDescription.cs" />
-    <Compile Include="ParameterInfo.cs" />
+    <Compile Include="Program.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="App.config" />
   </ItemGroup>
   <ItemGroup>
     <ProjectReference Include="..\Lab5_1.Common\Lab5_1.Common.csproj">
       <Project>{e24c43b9-00c9-4ca4-aff9-6d94807625dc}</Project>
       <Name>Lab5_1.Common</Name>
     </ProjectReference>
+    <ProjectReference Include="..\Lab5_1.Serialization\Lab5_1.Serialization.csproj">
+      <Project>{88f6c2c2-7942-4ef0-8339-f70200d4cc89}</Project>
+      <Name>Lab5_1.Serialization</Name>
+    </ProjectReference>
   </ItemGroup>
-  <ItemGroup />
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
 </Project>

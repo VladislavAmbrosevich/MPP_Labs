@@ -4,11 +4,11 @@ using System.Runtime.InteropServices;
 // General Information about an assembly is controlled through the following
 // set of attributes. Change these attribute values to modify the information
 // associated with an assembly.
-[assembly: AssemblyTitle("Lab5_1.Serialization")]
+[assembly: AssemblyTitle("Lab5_1.ConsoleApp")]
 [assembly: AssemblyDescription("")]
 [assembly: AssemblyConfiguration("")]
 [assembly: AssemblyCompany("")]
-[assembly: AssemblyProduct("Lab5_1.Serialization")]
+[assembly: AssemblyProduct("Lab5_1.ConsoleApp")]
 [assembly: AssemblyCopyright("Copyright ©  2017")]
 [assembly: AssemblyTrademark("")]
 [assembly: AssemblyCulture("")]
@@ -19,7 +19,7 @@ using System.Runtime.InteropServices;
 [assembly: ComVisible(false)]
 
 // The following GUID is for the ID of the typelib if this project is exposed to COM
-[assembly: Guid("88f6c2c2-7942-4ef0-8339-f70200d4cc89")]
+[assembly: Guid("8ad91cfd-2df2-4229-9576-e620a69ef410")]
 
 // Version information for an assembly consists of the following four values:
 //
