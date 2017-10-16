@@ -41,6 +41,7 @@
   </ItemGroup>
   <ItemGroup>
     <Compile Include="AccessModifiers.cs" />
+    <Compile Include="AccessModifiersExtensions.cs" />
     <Compile Include="AssemblyXmlSerializer.cs" />
     <Compile Include="TypeInfo.cs" />
     <Compile Include="TypeMembersDescriptions\ConstructorDescription.cs" />

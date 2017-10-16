@@ -8,4 +8,15 @@
         ProtectedInternal,
         Private
     }
+
+
+
+    public static class AccessModifierNames
+    {
+        public const string Public = "Public";
+        public const string Internal = "Internal";
+        public const string Protected = "Protected";
+        public const string ProtectedInternal = "Protected Internal";
+        public const string Private = "Private";
+    }
 }

@@ -13,6 +13,9 @@
         public const string ParameterTag = "Parameter";
         public const string AssemblyTag = "Assembly";
 
+        public const string NameAttribute = "Name";
+        public const string TypeAttribute = "Type";
+        public const string AccessModifierAttribute = "AccessModifier";
 
     }
 }
