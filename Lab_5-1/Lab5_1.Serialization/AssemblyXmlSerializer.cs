@@ -70,19 +70,19 @@ namespace Lab5_1.Serialization
 
                     typeInfo.Fields.Count != 0
                         ? ConstructFieldsXmlElement(typeInfo.Fields, parentTypes)
-                        : null,
+                        : null//,
 
-                    typeInfo.Methods.Count != 0
-                        ? ConstructMethodsXmlElement(typeInfo.Methods)
-                        : null,
+//                    typeInfo.Methods.Count != 0
+//                        ? ConstructMethodsXmlElement(typeInfo.Methods)
+//                        : null,
 
-                    typeInfo.ImplementedInterfaces.Count != 0
-                        ? ConstructImplementedInterfacesXmlElement(typeInfo.ImplementedInterfaces)
-                        : null,
+//                    typeInfo.ImplementedInterfaces.Count != 0
+//                        ? ConstructImplementedInterfacesXmlElement(typeInfo.ImplementedInterfaces)
+//                        : null,
 
-                    typeInfo.InheritedTypes.Count != 0
-                        ? ConstructInheritedTypesXmlElement(typeInfo.InheritedTypes)
-                        : null
+//                    typeInfo.InheritedTypes.Count != 0
+//                        ? ConstructInheritedTypesXmlElement(typeInfo.InheritedTypes)
+//                        : null
                 );
 
             return xElement;
@@ -90,11 +90,11 @@ namespace Lab5_1.Serialization
 
         private static XElement ConstructFieldsXmlElement(IList<FieldDescription> fieldsInfo, List<Type> parentTypes)
         {
-            foreach (var type in parentTypes)
-            {
-                Console.WriteLine(type.Name);
-            }
-            Console.WriteLine();
+//            foreach (var type in parentTypes)
+//            {
+//                Console.WriteLine(type.Name);
+//            }
+//            Console.WriteLine();
 //            var newList = new List<Type>();
 //            newList.AddRange(parentTypes);
 

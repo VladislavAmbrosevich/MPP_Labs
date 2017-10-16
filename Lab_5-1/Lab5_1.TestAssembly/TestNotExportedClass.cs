@@ -3,7 +3,7 @@
 namespace Lab5_1.TestAssembly
 {
     [ExportXml]
-    public class TestNotExportedClass
+    internal class TestNotExportedClass : InternalTestExportedClass
     {
         internal InternalTestExportedClass refField;
     }
