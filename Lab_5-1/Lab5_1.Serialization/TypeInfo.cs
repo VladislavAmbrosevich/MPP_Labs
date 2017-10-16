@@ -7,6 +7,8 @@ namespace Lab5_1.Serialization
 {
     public class TypeInfo : ITypeInfo
     {
+        public Type Type { get; set; }
+
         public string Name { get; set; }
 
         public IList<Type> InheritedTypes { get; set; }

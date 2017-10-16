@@ -15,6 +15,10 @@ namespace Lab5_1.TestAssembly
         public int PublicField;
 
         protected internal int ProtectedInternalField;
+
+        public PublicTestExportedClass RefField;
+
+        public InternalTestExportedClass RefFieldTwo;
 //
 //        public delegate void TestDelegateHandler();
 //

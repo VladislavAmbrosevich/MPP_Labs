@@ -15,6 +15,7 @@ namespace Lab5_1.Serialization
         public static ITypeInfo GetTypeInfo(Type type)
         {
             var typeInfo = new TypeInfo();
+            typeInfo.Type = type;
             typeInfo.Name = type.FullName;
             typeInfo.ImplementedInterfaces = type.GetInterfaces().ToList();
             typeInfo.InheritedTypes = GetInheritedTypes(type);

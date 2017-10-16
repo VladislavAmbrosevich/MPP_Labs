@@ -1,4 +1,5 @@
 ﻿using System;
+using System.CodeDom;
 using System.Collections.Generic;
 using System.Diagnostics;
 using System.Linq;
@@ -13,9 +14,19 @@ namespace Lab5_1.Serialization
 {
     public static class AssemblyXmlSerializer
     {
+        private const string SystemNamespace = "System";
+
+
+        private static readonly List<Type> _referenceTypeFields = new List<Type>(); // Also need for props
+
+
         public static void SerializeAssemblyToFile(Assembly assembly, string filePath)
         {
+            _referenceTypeFields.Clear();
+
             var typesInfo = GetAssemblyTypesInfo(assembly);
+            GetReferenceTypeFields(typesInfo);
+
             var xmlDocument = ConstructAssemblyXmlDocument(typesInfo);
             xmlDocument.Save(filePath);
         }
@@ -26,25 +37,39 @@ namespace Lab5_1.Serialization
         }
 
 
+        private static void GetReferenceTypeFields(List<ITypeInfo> typesInfo)
+        {
+            foreach (var typeInfo in typesInfo)
+            {
+                foreach (var field in typeInfo.Fields)
+                {
+                    if (field.Type.Namespace != null && !field.Type.Namespace.StartsWith(SystemNamespace) && !_referenceTypeFields.Contains(field.Type))
+                    {
+                        _referenceTypeFields.Add(field.Type);
+                    }
+                }
+            }
+        }
+
         private static XDocument ConstructAssemblyXmlDocument(List<ITypeInfo> typesInfo)
         {
             var xmlDocument = new XDocument(
                 new XElement(XmlNames.AssemblyTag,
                     from TypeInfo typeInfo in typesInfo
-                    orderby typeInfo.Name descending
-                    select ConstructClassXmlElement(typeInfo)));
+                    orderby typeInfo.Name
+                    select ConstructClassXmlElement(typeInfo, new List<Type> {typeInfo.Type})));
 
             return xmlDocument;
         }
 
-        private static XElement ConstructClassXmlElement(ITypeInfo typeInfo)
+        private static XElement ConstructClassXmlElement(ITypeInfo typeInfo, List<Type> parentTypes)
         {
             var xElement =
                 new XElement(XmlNames.ClassTag,
                     new XAttribute(XmlNames.NameAttribute, typeInfo.Name),
 
                     typeInfo.Fields.Count != 0
-                        ? ConstructFieldsXmlElement(typeInfo.Fields)
+                        ? ConstructFieldsXmlElement(typeInfo.Fields, parentTypes)
                         : null,
 
                     typeInfo.Methods.Count != 0
@@ -63,15 +88,67 @@ namespace Lab5_1.Serialization
             return xElement;
         }
 
-        private static XElement ConstructFieldsXmlElement(IList<FieldDescription> fieldsInfo)
+        private static XElement ConstructFieldsXmlElement(IList<FieldDescription> fieldsInfo, List<Type> parentTypes)
+        {
+            foreach (var type in parentTypes)
+            {
+                Console.WriteLine(type.Name);
+            }
+            Console.WriteLine();
+//            var newList = new List<Type>();
+//            newList.AddRange(parentTypes);
+
+            var simpleTypeFields =
+                from FieldDescription field in fieldsInfo
+                where !_referenceTypeFields.Contains(field.Type)
+                select ConstructSimpleTypeFieldXmlElement(field);
+            var complexTypeFields =
+                from FieldDescription field in fieldsInfo
+                where _referenceTypeFields.Contains(field.Type)
+                select ConstructComplexTypeFieldXmlElement(field, parentTypes);
+
+            var xElement =
+                new XElement(XmlNames.FieldsTag, simpleTypeFields, complexTypeFields);
+
+            return xElement;
+        }
+
+        private static XElement ConstructComplexTypeFieldXmlElement(FieldDescription fieldInfo, List<Type> parentTypes)
+        {
+            if (!parentTypes.Contains(fieldInfo.Type))
+            {
+                parentTypes.Add(fieldInfo.Type);
+                var typeInfo = TypeParser.GetTypeInfo(fieldInfo.Type);
+                var newList = new List<Type>();
+                newList.AddRange(parentTypes);
+
+                var xElement =
+                    new XElement(XmlNames.FieldTag,
+                        ConstructClassXmlElement(typeInfo, newList));
+//                    new XAttribute(XmlNames.NameAttribute, fieldInfo.Name),
+//                    new XAttribute(XmlNames.AccessModifierAttribute, fieldInfo.AccessModifier.GetString()),
+//                    new XAttribute(XmlNames.TypeAttribute, fieldInfo.Type.Name));
+
+                return xElement;
+            }
+            else
+            {
+                var xElement =
+                    new XElement(XmlNames.FieldTag, new XAttribute(XmlNames.NameAttribute, fieldInfo.Name),
+                        new XAttribute(XmlNames.AccessModifierAttribute, fieldInfo.AccessModifier.GetString()),
+                        new XAttribute(XmlNames.TypeAttribute, fieldInfo.Type.Name));
+
+                return xElement;
+            }
+        }
+
+        private static XElement ConstructSimpleTypeFieldXmlElement(FieldDescription fieldInfo)
         {
             var xElement =
-                new XElement(XmlNames.FieldsTag,
-                    from FieldDescription field in fieldsInfo
-                    select new XElement(XmlNames.FieldTag,
-                        new XAttribute(XmlNames.NameAttribute, field.Name),
-                        new XAttribute(XmlNames.AccessModifierAttribute, field.AccessModifier.GetString()),
-                        new XAttribute(XmlNames.TypeAttribute, field.Type.Name)));
+                new XElement(XmlNames.FieldTag,
+                    new XAttribute(XmlNames.NameAttribute, fieldInfo.Name),
+                    new XAttribute(XmlNames.AccessModifierAttribute, fieldInfo.AccessModifier.GetString()),
+                    new XAttribute(XmlNames.TypeAttribute, fieldInfo.Type.Name));
 
             return xElement;
         }

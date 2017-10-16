@@ -6,6 +6,8 @@ namespace Lab5_1.Serialization.Interfaces
 {
     public interface ITypeInfo
     {
+        Type Type { get; set; }
+
         string Name { get; set; }
 
         IList<Type> InheritedTypes { get; set; }

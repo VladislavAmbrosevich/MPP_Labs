@@ -20,7 +20,7 @@ namespace Lab5_1.ConsoleApp
 //            var typeInfo = TypeParser.GetTypeInfo(types[1]);
 
             AssemblyXmlSerializer.SerializeAssemblyToFile(assembly, "TestSerialization.xml");
-//            Console.ReadLine();
+            Console.ReadLine();
         }
     }
 }
