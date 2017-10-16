@@ -1,4 +1,5 @@
-﻿using System.Collections.Generic;
+﻿using System;
+using System.Collections.Generic;
 using Lab5_1.Serialization.TypeMembersDescriptions;
 
 namespace Lab5_1.Serialization.Interfaces
@@ -7,12 +8,12 @@ namespace Lab5_1.Serialization.Interfaces
     {
         string Name { get; set; }
 
-        IReadOnlyCollection<string> InheritedTypes { get; }
+        IList<Type> InheritedTypes { get; set; }
 
-        IReadOnlyCollection<string> ImplementedInterfaces { get; }
+        IList<Type> ImplementedInterfaces { get; set; }
 
-        IReadOnlyCollection<FieldDescription> Fields { get; }
+        IList<FieldDescription> Fields { get; set; }
 
-        IReadOnlyCollection<MethodDescription> Methods{ get; }
+        IList<MethodDescription> Methods{ get; set; }
     }
 }

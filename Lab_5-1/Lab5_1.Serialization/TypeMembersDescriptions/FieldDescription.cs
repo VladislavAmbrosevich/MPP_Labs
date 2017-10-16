@@ -4,10 +4,10 @@ namespace Lab5_1.Serialization.TypeMembersDescriptions
 {
     public class FieldDescription
     {
-        public Type Type { get; }
+        public Type Type { get; set; }
 
-        public string Name { get; }
+        public string Name { get; set; }
 
-        public string AccessModifier { get; }
+        public AccessModifiers AccessModifier { get; set; }
     }
 }

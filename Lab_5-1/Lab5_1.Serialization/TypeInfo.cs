@@ -1,4 +1,5 @@
-﻿using System.Collections.Generic;
+﻿using System;
+using System.Collections.Generic;
 using Lab5_1.Serialization.Interfaces;
 using Lab5_1.Serialization.TypeMembersDescriptions;
 
@@ -8,21 +9,21 @@ namespace Lab5_1.Serialization
     {
         public string Name { get; set; }
 
-        public IReadOnlyCollection<string> InheritedTypes { get; }
+        public IList<Type> InheritedTypes { get; set; }
 
-        public IReadOnlyCollection<string> ImplementedInterfaces { get; }
+        public IList<Type> ImplementedInterfaces { get; set; }
 
-        public IReadOnlyCollection<FieldDescription> Fields { get; }
+        public IList<FieldDescription> Fields { get; set; }
 
-        public IReadOnlyCollection<MethodDescription> Methods { get; }
+        public IList<MethodDescription> Methods { get; set; }
 
 
         public TypeInfo()
         {
             Fields = new List<FieldDescription>();
             Methods = new List<MethodDescription>();
-            InheritedTypes = new List<string>();
-            ImplementedInterfaces = new List<string>();
+            InheritedTypes = new List<Type>();
+            ImplementedInterfaces = new List<Type>();
             Name = "";
         }
     }

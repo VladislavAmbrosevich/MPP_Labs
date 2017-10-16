@@ -5,12 +5,18 @@ namespace Lab5_1.Serialization.TypeMembersDescriptions
 {
     public class MethodDescription
     {
-        public string Name { get; }
+        public string Name { get; set; }
 
-        public Type ReturnType { get; }
+        public Type ReturnType { get; set; }
 
-        public string AccessModifier { get; }
+        public AccessModifiers AccessModifier { get; set; }
 
-        public IReadOnlyCollection<ParameterInfo> Params { get; } = new List<ParameterInfo>();
+        public IList<ParameterInfo> Params { get; set; }
+
+
+        public MethodDescription()
+        {
+            Params = new List<ParameterInfo>();
+        }
     }
 }

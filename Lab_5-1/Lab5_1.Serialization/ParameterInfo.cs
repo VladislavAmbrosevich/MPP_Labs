@@ -1,9 +1,11 @@
-﻿namespace Lab5_1.Serialization
+﻿using System;
+
+namespace Lab5_1.Serialization
 {
     public class ParameterInfo
     {
-        public string Name { get; }
+        public string Name { get; set; }
 
-        public string Type { get; }
+        public Type Type { get; set; }
     }
 }

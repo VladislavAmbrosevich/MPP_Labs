@@ -4,14 +4,14 @@ namespace Lab5_1.Serialization.TypeMembersDescriptions
 {
     public class PropertyDescription
     {
-        public Type Type { get; }
+        public Type Type { get; set; }
 
-        public string Name { get; }
+        public string Name { get; set; }
 
-        public string AccessModifier { get; }
+        public AccessModifiers AccessModifier { get; set; }
 
-        public string GetterAccessModifier { get; }
+        public string GetterAccessModifier { get; set; }
 
-        public string SetterAccessModifier { get; }
+        public string SetterAccessModifier { get; set; }
     }
 }
