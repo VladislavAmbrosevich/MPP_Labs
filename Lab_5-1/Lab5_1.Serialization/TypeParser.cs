@@ -2,6 +2,7 @@
 using System.Collections.Generic;
 using System.Linq;
 using System.Reflection;
+using Lab5_1.Serialization.Interfaces;
 using Lab5_1.Serialization.TypeMembersDescriptions;
 
 namespace Lab5_1.Serialization
@@ -11,7 +12,7 @@ namespace Lab5_1.Serialization
         private const BindingFlags BindingFlagsSet = BindingFlags.NonPublic | BindingFlags.Instance | BindingFlags.Public;
 
 
-        public static TypeInfo GetTypeInfo(Type type)
+        public static ITypeInfo GetTypeInfo(Type type)
         {
             var typeInfo = new TypeInfo();
             typeInfo.Name = type.FullName;
