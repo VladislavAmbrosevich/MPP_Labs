@@ -11,6 +11,6 @@ namespace Lab5_1.Serialization.TypeMembersDescriptions
 
         public AccessModifiers AccessModifier { get; set; }
 
-        public IReadOnlyCollection<ParameterInfo> Params { get; set; } = new List<ParameterInfo>();
+        public IReadOnlyCollection<ParameterInfo> Params { get; set; }
     }
 }

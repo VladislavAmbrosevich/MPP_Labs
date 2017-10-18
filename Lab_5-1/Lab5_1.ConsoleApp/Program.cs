@@ -1,26 +1,37 @@
 ﻿using System;
-using System.Linq;
+using System.IO;
 using System.Reflection;
-using Lab5_1.Common;
 using Lab5_1.Serialization;
 
 namespace Lab5_1.ConsoleApp
 {
     internal class Program
     {
-        //        private const string AssemblyName = "Lab5_1.TestAssembly.dll";
-        //        private const string AssemblyName = @"D:\БГУИР\СПП\5сем\MPP_Labs\Lab_5-1\Lab5_1.TestAssembly\bin\Debug\Lab5_1.TestAssembly.dll";
-        private const string AssemblyName = @"D:\Projects\repos\labs\MPP_Labs\Lab_5-1\Lab5_1.TestAssembly\bin\Debug\Lab5_1.TestAssembly.dll";
-
         private static void Main(string[] args)
         {
-            var assembly = Assembly.LoadFrom(AssemblyName);
-//            var types = assembly.GetTypes().Where(type => type.IsDefined(typeof(ExportXmlAttribute), false)).ToList();
+            if (args.Length < 1)
+            {
+                Console.WriteLine("You must pass the assembly path in the first parameter.");
+                return;
+            }
 
-//            var typeInfo = TypeParser.GetTypeInfo(types[1]);
+            var assemblyPath = args[0];
+            if (Path.GetExtension(assemblyPath) != FileExtensions.Dll && Path.GetExtension(assemblyPath) != FileExtensions.Exe)
+            {
+                Console.WriteLine("You must pass a path to dll or exe file.");
+                return;
+            }
 
-            AssemblyXmlSerializer.SerializeAssemblyToFile(assembly, "TestSerialization.xml");
-            Console.ReadLine();
+            try
+            {
+                var assembly = Assembly.LoadFrom(assemblyPath);
+                AssemblyXmlSerializer.SerializeAssemblyToFile(assembly, assemblyPath + FileExtensions.Xml);
+                Console.WriteLine($"Saved to: {assemblyPath + FileExtensions.Xml}");
+            }
+            catch (Exception e)
+            {
+                Console.WriteLine(e);
+            }
         }
     }
 }

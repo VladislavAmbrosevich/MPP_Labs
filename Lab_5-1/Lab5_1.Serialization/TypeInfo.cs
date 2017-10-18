@@ -1,23 +1,24 @@
 ﻿using System;
 using System.Collections.Generic;
-using Lab5_1.Serialization.Interfaces;
 using Lab5_1.Serialization.TypeMembersDescriptions;
 
 namespace Lab5_1.Serialization
 {
-    public class TypeInfo : ITypeInfo
+    public class TypeInfo
     {
-        public Type Type { get; set; }
+        public string AssemblyQualifiedName { get; set; }
 
         public string Name { get; set; }
 
-        public IList<Type> InheritedTypes { get; set; }
+        public string Namespace { get; set; }
 
-        public IList<Type> ImplementedInterfaces { get; set; }
+        public List<Type> InheritedTypes { get; set; }
 
-        public IList<FieldDescription> Fields { get; set; }
+        public List<Type> ImplementedInterfaces { get; set; }
 
-        public IList<MethodDescription> Methods { get; set; }
+        public List<FieldDescription> Fields { get; set; }
+
+        public List<MethodDescription> Methods { get; set; }
 
 
         public TypeInfo()
@@ -27,6 +28,8 @@ namespace Lab5_1.Serialization
             InheritedTypes = new List<Type>();
             ImplementedInterfaces = new List<Type>();
             Name = "";
+            Namespace = "";
+            AssemblyQualifiedName = "";
         }
     }
 }

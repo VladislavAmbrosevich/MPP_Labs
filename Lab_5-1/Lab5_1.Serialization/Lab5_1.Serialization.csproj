@@ -50,8 +50,6 @@
     <Compile Include="TypeMembersDescriptions\FieldDescription.cs" />
     <Compile Include="TypeMembersDescriptions\PropertyDescription.cs" />
     <Compile Include="TypeParser.cs" />
-    <Compile Include="Interfaces\IAssemblyXmlSerializer.cs" />
-    <Compile Include="Interfaces\ITypeInfo.cs" />
     <Compile Include="TypeMembersDescriptions\MethodDescription.cs" />
     <Compile Include="ParameterInfo.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />

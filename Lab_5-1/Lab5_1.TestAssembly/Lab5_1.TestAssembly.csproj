@@ -40,9 +40,12 @@
     <Reference Include="System.Xml" />
   </ItemGroup>
   <ItemGroup>
+    <Compile Include="InheritedTestExportedClass.cs" />
+    <Compile Include="Interfaces\IInternalTestInterface.cs" />
     <Compile Include="PublicTestExportedClass.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
     <Compile Include="InternalTestExportedClass.cs" />
+    <Compile Include="Interfaces\IPublicTestInterface.cs" />
     <Compile Include="TestNotExportedClass.cs" />
   </ItemGroup>
   <ItemGroup>

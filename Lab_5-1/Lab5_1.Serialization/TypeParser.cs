@@ -2,7 +2,6 @@
 using System.Collections.Generic;
 using System.Linq;
 using System.Reflection;
-using Lab5_1.Serialization.Interfaces;
 using Lab5_1.Serialization.TypeMembersDescriptions;
 
 namespace Lab5_1.Serialization
@@ -12,16 +11,18 @@ namespace Lab5_1.Serialization
         private const BindingFlags BindingFlagsSet = BindingFlags.NonPublic | BindingFlags.Instance | BindingFlags.Public;
 
 
-        public static ITypeInfo GetTypeInfo(Type type)
+        public static TypeInfo GetTypeInfo(Type type)
         {
-            var typeInfo = new TypeInfo();
-            typeInfo.Type = type;
-            typeInfo.Name = type.FullName;
-            typeInfo.ImplementedInterfaces = type.GetInterfaces().ToList();
-            typeInfo.InheritedTypes = GetInheritedTypes(type);
-
-            typeInfo.Fields = GetFields(type);
-            typeInfo.Methods = GetMethods(type);
+            var typeInfo = new TypeInfo
+            {
+                AssemblyQualifiedName = type.AssemblyQualifiedName,
+                Name = type.Name,
+                Namespace = type.Namespace,
+                ImplementedInterfaces = type.GetInterfaces().ToList(),
+                InheritedTypes = GetInheritedTypes(type),
+                Fields = GetFields(type),
+                Methods = GetMethods(type)
+            };
 
             return typeInfo;
         }
@@ -35,7 +36,6 @@ namespace Lab5_1.Serialization
             return inheritedTypes;
         }
 
-        // Need to remove fields if they are not fields (custom events)
         private static List<FieldDescription> GetFields(Type type)
         {
             var fieldsList = new List<FieldDescription>();
@@ -54,7 +54,6 @@ namespace Lab5_1.Serialization
             return fieldsList;
         }
 
-        // Need to remove methods for getters, setters, add, remove
         private static List<MethodDescription> GetMethods(Type type)
         {
             var methodsList = new List<MethodDescription>();
