@@ -30,7 +30,7 @@ namespace Lab5_1.ConsoleApp
             }
             catch (Exception e)
             {
-                Console.WriteLine(e);
+                Console.WriteLine(e.Message);
             }
         }
     }

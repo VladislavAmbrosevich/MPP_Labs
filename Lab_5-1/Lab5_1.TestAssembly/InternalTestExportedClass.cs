@@ -17,7 +17,7 @@ namespace Lab5_1.TestAssembly
         protected internal int ProtectedInternalField;
 
 
-        private int PrivateMethod(int a)
+        private int PrivateMethod(int a, string b)
         {
             return ++a;
         }
