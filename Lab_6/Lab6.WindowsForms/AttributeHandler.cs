@@ -63,8 +63,23 @@ namespace Lab6.WindowsForms
                     }
                 }
             }
+            foreach (var attributeString in list)
+            {
+                var attribute = ParseAttributeFromString(attributeString);
+                attributes.Add(attribute);
+            }
 
             return attributes;
+        }
+
+        private static AttributeItem ParseAttributeFromString(string attributeString)
+        {
+            var delimiter = attributeString.IndexOfAny(new []{'='});
+            var key = attributeString.Substring(0, delimiter);
+            var value = attributeString.Substring(delimiter + 2, attributeString.Length - delimiter - 3);
+            var attribute = new AttributeItem(key, value);
+
+            return attribute;
         }
     }
 
