@@ -1,11 +1,6 @@
 ﻿using System;
 using System.Collections.Generic;
 using System.Linq;
-using System.Text;
-using System.Text.RegularExpressions;
-using System.Threading.Tasks;
-using System.Xml.Linq;
-using Lab6.Serialization;
 
 namespace Lab6.WindowsForms
 {
@@ -33,14 +28,14 @@ namespace Lab6.WindowsForms
                 list.RemoveAt(list.Count - 1);
             }
 
-            var tempList = "";
+            var tempList = String.Empty;
             for (var i = 0; i < list.Count; i++)
             {
                 var count = list[i].ToCharArray().Where(x => x == '\"').Count();
                 if (count < 2)
                 {
 
-                    if (tempList == "")
+                    if (tempList == String.Empty)
                     {
                         tempList = list[i];
                     }
@@ -51,7 +46,7 @@ namespace Lab6.WindowsForms
                         i--;
                         if (count != 0)
                         {
-                            tempList = "";
+                            tempList = String.Empty;
                         }
                     }
                 }

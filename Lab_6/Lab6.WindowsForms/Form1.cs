@@ -1,5 +1,5 @@
-﻿using System;
-using System.Collections.Generic;
+﻿using System.Collections.Generic;
+using System.Security.Cryptography.X509Certificates;
 using System.Windows.Forms;
 using Lab6.Serialization;
 
@@ -7,29 +7,28 @@ namespace Lab6.WindowsForms
 {
     public partial class Form1 : Form
     {
-        private const string FilePath = @"D:\Projects\repos\labs\MPP_Labs\Lab_6\Lab6.TestConsoleApp\bin\Debug\Lab5_1.TestAssembly.dll.xml";
+        private const string FilePath =
+            @"D:\БГУИР\СПП\5сем\MPP_Labs\Lab_6\Lab6.TestConsoleApp\bin\Debug\Lab5_1.TestAssembly.dll.xml";
 
         private TreeNode _selectedNode;
         private bool _isFilledFirstRow;
+        private List<VisualAttributeItem> _visualAttributeItems;
+        private List<string> _loadedFiles;
+        private List<TreeView> _treeViews;
+
 
         public Form1()
         {
             InitializeComponent();
-            drvwAttributes.Rows.Clear();
-
-
-            var assemblyInfo = AssemblyXmlSerializer.ParseFromXmlFile(FilePath);
-
-            var assemblyNode = TreeViewBuilder.BuildTreeViewFromAssembly(assemblyInfo);
-            LoadTreeViewToVisualElement(assemblyNode);
-
-            XmlHandler.SaveTreeViewToXmlFile(trvwAssemblyInfo, @"C:\Users\u.ambrasevich\Desktop\TreeView.xml");
+            _visualAttributeItems = new List<VisualAttributeItem>();
+            _loadedFiles = new List<string>();
+            _treeViews = new List<TreeView>();
         }
 
 
-        private void LoadTreeViewToVisualElement(List<TreeNode> treeViewNode)
+        private void LoadTreeViewToVisualElement(TreeView treeView, List<TreeNode> treeViewNode)
         {
-            trvwAssemblyInfo.Nodes.AddRange(treeViewNode.ToArray());
+            treeView.Nodes.AddRange(treeViewNode.ToArray());
         }
 
         private void trvwAssemblyInfo_AfterSelect(object sender, TreeViewEventArgs e)
@@ -62,22 +61,28 @@ namespace Lab6.WindowsForms
 
         private void OnEditNodeStarted(TreeNode selectedNode)
         {
-            drvwAttributes.Rows.Clear();
-            drvwAttributes.RowCount = 1;
+            var topMargin = 20;
 
             var attributes = AttributeHandler.ParseStringOnAttributes(selectedNode.Text);
-            foreach (var attribute in attributes)
+            pnlAttributes.Controls.Clear();
+            _visualAttributeItems.Clear();
+            foreach (AttributeItem t in attributes)
             {
-//                drvwAttributes.Rows.Add();
-                if (_isFilledFirstRow)
+                var textBox = new TextBox();
+                var label = new Label
                 {
-                    drvwAttributes.Rows.Add();
-                }
-                drvwAttributes.Rows[drvwAttributes.Rows.Count - 1].Cells[0].Value = attribute.Key;
-                drvwAttributes.Rows[drvwAttributes.Rows.Count - 1].Cells[1].Value = attribute.Value;
-                _isFilledFirstRow = true;
-//                drvwAttributes.Rows.Add();
+                    Parent = pnlAttributes,
+                    Top = topMargin,
+                    Text = t.Key
+                };
+                textBox.Parent = pnlAttributes;
+                textBox.Top = topMargin + 30;
+                textBox.Text = t.Value;
+                textBox.Width = 300;
+                topMargin += 60;
 
+                var visualAttributeItem = new VisualAttributeItem(textBox, label);
+                _visualAttributeItems.Add(visualAttributeItem);
             }
         }
 
@@ -95,18 +100,84 @@ namespace Lab6.WindowsForms
             var parts = selectedNode.Text.Split(' ');
 
             var attributes = new List<AttributeItem>();
-            foreach (DataGridViewRow row in drvwAttributes.Rows)
+            foreach (var visualAttributeItem in _visualAttributeItems)
             {
-                if (row.Cells[0].Value != null && row.Cells[1].Value != null)
-                {
-                    var attribute = new AttributeItem(row.Cells[0].Value.ToString(), row.Cells[1].Value.ToString());
-                    attributes.Add(attribute);
-                }
-
-
+                var attribute = new AttributeItem(visualAttributeItem.KeyLabel.Text, visualAttributeItem.ValueTextBox.Text);
+                attributes.Add(attribute);
             }
 
             selectedNode.Text = parts[0] + " " + AttributeHandler.TransformAttributesListToString(attributes) + endPart;
+        }
+
+        private void OnNewFileLoaded(string fileName, string safeFileName)
+        {
+            var tabpage = new TabPage(safeFileName);
+            
+            tabControl1.TabPages.Add(tabpage);
+
+            var treeview = new TreeView();
+            treeview.AfterSelect += (sender, e) =>
+            {
+                _selectedNode = e.Node;
+                OnNodeSelected(_selectedNode);
+            };
+
+            treeview.Parent = tabpage;
+            treeview.Dock = DockStyle.Fill;
+
+            var assemblyInfo = AssemblyXmlSerializer.ParseFromXmlFile(fileName);
+
+            var assemblyNode = TreeViewBuilder.BuildTreeViewFromAssembly(assemblyInfo);
+            LoadTreeViewToVisualElement(treeview, assemblyNode);
+
+        }
+
+        private void openToolStripMenuItem_Click(object sender, System.EventArgs e)
+        {
+            if (openFileDialog1.ShowDialog() == DialogResult.OK)
+            {
+                _loadedFiles.Add(openFileDialog1.FileName);
+                OnNewFileLoaded(openFileDialog1.FileName, openFileDialog1.SafeFileName);
+            }
+        }
+
+
+        private sealed class VisualAttributeItem
+        {
+            public TextBox ValueTextBox { get; }
+
+            public Label KeyLabel { get; }
+
+
+            public VisualAttributeItem(TextBox textBox, Label label)
+            {
+                ValueTextBox = textBox;
+                KeyLabel = label;
+            }
+        }
+
+        private void closeToolStripMenuItem_Click(object sender, System.EventArgs e)
+        {
+            var index = tabControl1.SelectedIndex;
+            tabControl1.TabPages.Remove(tabControl1.SelectedTab);
+            _loadedFiles.RemoveAt(index);
+        }
+
+        private void saveToolStripMenuItem_Click(object sender, System.EventArgs e)
+        {
+            var index = tabControl1.SelectedIndex;
+            var treeView = (TreeView)tabControl1.SelectedTab.Controls[0];
+
+            XmlHandler.SaveTreeViewToXmlFile(treeView, _loadedFiles[index]);
+        }
+
+        private void saveAsToolStripMenuItem_Click(object sender, System.EventArgs e)
+        {
+            if (saveFileDialog1.ShowDialog() == DialogResult.OK)
+            {
+                var treeView = (TreeView)tabControl1.SelectedTab.Controls[0];
+                XmlHandler.SaveTreeViewToXmlFile(treeView, saveFileDialog1.FileName);
+            }
         }
     }
 }

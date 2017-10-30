@@ -7,7 +7,7 @@ namespace Lab6.WindowsForms
     public static class XmlHandler
     {
         private const string OneTab = "  ";
-        private const string XmlFileDeclaration = "<?xml version=\"1.0\" encoding=\"utf - 8\"?>";
+        private const string XmlFileDeclaration = "<?xml version=\"1.0\" encoding=\"utf-8\"?>";
 
 
         public static void SaveTreeViewToXmlFile(TreeView treeView, string filePath)
