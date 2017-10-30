@@ -30,8 +30,8 @@
         {
             this.trvwAssemblyInfo = new System.Windows.Forms.TreeView();
             this.btnEditNode = new System.Windows.Forms.Button();
-            this.panel1 = new System.Windows.Forms.Panel();
             this.drvwAttributes = new System.Windows.Forms.DataGridView();
+            this.btnSaveAttributes = new System.Windows.Forms.Button();
             this.Keys = new System.Windows.Forms.DataGridViewTextBoxColumn();
             this.Values = new System.Windows.Forms.DataGridViewTextBoxColumn();
             ((System.ComponentModel.ISupportInitialize)(this.drvwAttributes)).BeginInit();
@@ -41,7 +41,7 @@
             // 
             this.trvwAssemblyInfo.Location = new System.Drawing.Point(0, 48);
             this.trvwAssemblyInfo.Name = "trvwAssemblyInfo";
-            this.trvwAssemblyInfo.Size = new System.Drawing.Size(883, 356);
+            this.trvwAssemblyInfo.Size = new System.Drawing.Size(698, 356);
             this.trvwAssemblyInfo.TabIndex = 1;
             this.trvwAssemblyInfo.AfterSelect += new System.Windows.Forms.TreeViewEventHandler(this.trvwAssemblyInfo_AfterSelect);
             // 
@@ -55,42 +55,47 @@
             this.btnEditNode.UseVisualStyleBackColor = true;
             this.btnEditNode.Click += new System.EventHandler(this.btnEditNode_Click);
             // 
-            // panel1
-            // 
-            this.panel1.Location = new System.Drawing.Point(916, 165);
-            this.panel1.Name = "panel1";
-            this.panel1.Size = new System.Drawing.Size(328, 296);
-            this.panel1.TabIndex = 3;
-            // 
             // drvwAttributes
             // 
             this.drvwAttributes.ColumnHeadersHeightSizeMode = System.Windows.Forms.DataGridViewColumnHeadersHeightSizeMode.AutoSize;
             this.drvwAttributes.Columns.AddRange(new System.Windows.Forms.DataGridViewColumn[] {
             this.Keys,
             this.Values});
-            this.drvwAttributes.Location = new System.Drawing.Point(415, 444);
+            this.drvwAttributes.Location = new System.Drawing.Point(761, 164);
             this.drvwAttributes.Name = "drvwAttributes";
-            this.drvwAttributes.Size = new System.Drawing.Size(364, 106);
+            this.drvwAttributes.Size = new System.Drawing.Size(516, 106);
             this.drvwAttributes.TabIndex = 4;
+            // 
+            // btnSaveAttributes
+            // 
+            this.btnSaveAttributes.Location = new System.Drawing.Point(994, 334);
+            this.btnSaveAttributes.Name = "btnSaveAttributes";
+            this.btnSaveAttributes.Size = new System.Drawing.Size(150, 53);
+            this.btnSaveAttributes.TabIndex = 5;
+            this.btnSaveAttributes.Text = "Save";
+            this.btnSaveAttributes.UseVisualStyleBackColor = true;
+            this.btnSaveAttributes.Click += new System.EventHandler(this.btnSaveAttributes_Click);
             // 
             // Keys
             // 
             this.Keys.HeaderText = "Keys";
             this.Keys.Name = "Keys";
             this.Keys.ReadOnly = true;
+            this.Keys.Width = 200;
             // 
             // Values
             // 
             this.Values.HeaderText = "Values";
             this.Values.Name = "Values";
+            this.Values.Width = 200;
             // 
             // Form1
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.ClientSize = new System.Drawing.Size(1328, 675);
+            this.Controls.Add(this.btnSaveAttributes);
             this.Controls.Add(this.drvwAttributes);
-            this.Controls.Add(this.panel1);
             this.Controls.Add(this.btnEditNode);
             this.Controls.Add(this.trvwAssemblyInfo);
             this.Name = "Form1";
@@ -103,8 +108,8 @@
         #endregion
         private System.Windows.Forms.TreeView trvwAssemblyInfo;
         private System.Windows.Forms.Button btnEditNode;
-        private System.Windows.Forms.Panel panel1;
         private System.Windows.Forms.DataGridView drvwAttributes;
+        private System.Windows.Forms.Button btnSaveAttributes;
         private System.Windows.Forms.DataGridViewTextBoxColumn Keys;
         private System.Windows.Forms.DataGridViewTextBoxColumn Values;
     }

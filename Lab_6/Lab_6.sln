@@ -3,8 +3,6 @@ Microsoft Visual Studio Solution File, Format Version 12.00
 # Visual Studio 15
 VisualStudioVersion = 15.0.27004.2005
 MinimumVisualStudioVersion = 10.0.40219.1
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Lab6.UI", "Lab6.UI\Lab6.UI.csproj", "{3B176F82-E92C-4742-BDAD-77C710541458}"
-EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Lab6.Serialization", "Lab6.Serialization\Lab6.Serialization.csproj", "{88F6C2C2-7942-4EF0-8339-F70200D4CC89}"
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Lab6.Common", "Lab6.Common\Lab6.Common.csproj", "{E24C43B9-00C9-4CA4-AFF9-6D94807625DC}"
@@ -19,10 +17,6 @@ Global
 		Release|Any CPU = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(ProjectConfigurationPlatforms) = postSolution
-		{3B176F82-E92C-4742-BDAD-77C710541458}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
-		{3B176F82-E92C-4742-BDAD-77C710541458}.Debug|Any CPU.Build.0 = Debug|Any CPU
-		{3B176F82-E92C-4742-BDAD-77C710541458}.Release|Any CPU.ActiveCfg = Release|Any CPU
-		{3B176F82-E92C-4742-BDAD-77C710541458}.Release|Any CPU.Build.0 = Release|Any CPU
 		{88F6C2C2-7942-4EF0-8339-F70200D4CC89}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
 		{88F6C2C2-7942-4EF0-8339-F70200D4CC89}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{88F6C2C2-7942-4EF0-8339-F70200D4CC89}.Release|Any CPU.ActiveCfg = Release|Any CPU

@@ -24,13 +24,6 @@ namespace Lab6.WindowsForms
         public static List<AttributeItem> ParseStringOnAttributes(string nodeText)
         {
             var attributes = new List<AttributeItem>();
-
-            //            var parts = nodeText.Split(' ');
-            //            var positions = nodeText.IndexOf("=");
-//            var xDoc = XElement.Parse(nodeText);
-            
-//            var assemblyElement = xDoc.Element(XmlNames.AssemblyTag);
-
             var parts = nodeText.Substring(1, nodeText.Length - 2).Split(' ');
             var list = new List<string>(parts);
 
@@ -71,6 +64,18 @@ namespace Lab6.WindowsForms
 
             return attributes;
         }
+
+        public static string TransformAttributesListToString(List<AttributeItem> attributes)
+        {
+            var resultLine = String.Empty;
+            foreach (var attribute in attributes)
+            {
+                resultLine = resultLine + attribute.Key + "=\"" + attribute.Value + "\" ";
+            }
+
+            return resultLine.TrimEnd(' ');
+        }
+
 
         private static AttributeItem ParseAttributeFromString(string attributeString)
         {
