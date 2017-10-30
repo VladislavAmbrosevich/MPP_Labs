@@ -1,0 +1,62 @@
+﻿<Window x:Class="Lab6.UI.MainWindow"
+        xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+        xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+        xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
+        xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+        xmlns:local="clr-namespace:Lab6.UI"
+        xmlns:viewModels="clr-namespace:Lab6.UI.ViewModels"
+        mc:Ignorable="d"
+        d:DesignWidth="1280" d:DesignHeight="700"
+        d:DataContext="{d:DesignInstance viewModels:MainViewModel}"
+        Title="{Binding Title}">
+
+    <Window.Resources>
+        <ResourceDictionary>
+            <ResourceDictionary.MergedDictionaries>
+                <ResourceDictionary Source="../Themes/Styles.xaml" />
+            </ResourceDictionary.MergedDictionaries>
+        </ResourceDictionary>
+    </Window.Resources>
+
+    <Grid Style="{StaticResource MainGridStyle}">
+        <TabControl HorizontalAlignment="Left" Height="100" Margin="165,161,0,0" VerticalAlignment="Top" Width="266">
+            <TabItem>
+                <TabItem.Header>
+                    <StackPanel Orientation="Horizontal">
+                        <TextBlock>Ilya pidor</TextBlock>
+                        <Rectangle Height="10" Width="10" Fill="Black" Margin="3,0,0,0"/>
+                    </StackPanel>
+                </TabItem.Header>
+                <TabItem.Content>
+                    <StackPanel>
+                        <RadioButton IsChecked="True">iPhone S6</RadioButton>
+                        <RadioButton>LG G 4</RadioButton>
+                        <RadioButton>Lumia 550</RadioButton>
+                    </StackPanel>
+                </TabItem.Content>
+            </TabItem>
+            <TabItem>
+                <TabItem.Header>
+                    <StackPanel Orientation="Horizontal">
+                        <TextBlock>Ilya loh</TextBlock>
+                        <Rectangle Height="10" Width="10" Fill="Black" Margin="3,0,0,0"/>
+                    </StackPanel>
+                </TabItem.Header>
+                <TabItem.Content>
+                    <StackPanel>
+                        <RadioButton IsChecked="False">iPhone S6</RadioButton>
+                        <RadioButton>LG G 4</RadioButton>
+                    </StackPanel>
+                </TabItem.Content>
+            </TabItem>
+            <TabItem Header="TabItem">
+                <Grid Background="#FFE5E5E5"/>
+            </TabItem>
+            <TabItem Header="TabItem">
+                <Grid Background="#FFE5E5E5"/>
+            </TabItem>
+        </TabControl>
+        <TreeView HorizontalAlignment="Left" Height="100" Margin="10,59,0,0" VerticalAlignment="Top" Width="100"/>
+
+    </Grid>
+</Window>

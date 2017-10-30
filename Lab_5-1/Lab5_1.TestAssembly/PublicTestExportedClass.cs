@@ -1,5 +1,4 @@
-﻿using System;
-using Lab5_1.Common;
+﻿using Lab5_1.Common;
 
 namespace Lab5_1.TestAssembly
 {
@@ -9,12 +8,6 @@ namespace Lab5_1.TestAssembly
         internal InternalTestExportedClass ReferenceTypeField;
 
 
-        public int Property { get; set; }
-
-
-        public event EventHandler Event;
-
-
-        public delegate void TestDelegate();
+        public int PublicField;
     }
 }
