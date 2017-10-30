@@ -10,7 +10,7 @@ namespace Lab6.Serialization.Parsing.ParsedTypeMembersDescriptions
 
         public string AccessModifier { get; set; }
 
-        public IList<ParsedParameterInfo> Params { get; set; }
+        public List<ParsedParameterInfo> Params { get; set; }
 
 
         public ParsedMethodDescription()

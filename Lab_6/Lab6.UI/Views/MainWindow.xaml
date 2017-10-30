@@ -19,44 +19,48 @@
     </Window.Resources>
 
     <Grid Style="{StaticResource MainGridStyle}">
-        <TabControl HorizontalAlignment="Left" Height="100" Margin="165,161,0,0" VerticalAlignment="Top" Width="266">
-            <TabItem>
-                <TabItem.Header>
-                    <StackPanel Orientation="Horizontal">
-                        <TextBlock>Ilya pidor</TextBlock>
-                        <Rectangle Height="10" Width="10" Fill="Black" Margin="3,0,0,0"/>
-                    </StackPanel>
-                </TabItem.Header>
-                <TabItem.Content>
-                    <StackPanel>
-                        <RadioButton IsChecked="True">iPhone S6</RadioButton>
-                        <RadioButton>LG G 4</RadioButton>
-                        <RadioButton>Lumia 550</RadioButton>
-                    </StackPanel>
-                </TabItem.Content>
-            </TabItem>
-            <TabItem>
-                <TabItem.Header>
-                    <StackPanel Orientation="Horizontal">
-                        <TextBlock>Ilya loh</TextBlock>
-                        <Rectangle Height="10" Width="10" Fill="Black" Margin="3,0,0,0"/>
-                    </StackPanel>
-                </TabItem.Header>
-                <TabItem.Content>
-                    <StackPanel>
-                        <RadioButton IsChecked="False">iPhone S6</RadioButton>
-                        <RadioButton>LG G 4</RadioButton>
-                    </StackPanel>
-                </TabItem.Content>
-            </TabItem>
-            <TabItem Header="TabItem">
-                <Grid Background="#FFE5E5E5"/>
-            </TabItem>
-            <TabItem Header="TabItem">
-                <Grid Background="#FFE5E5E5"/>
-            </TabItem>
-        </TabControl>
-        <TreeView HorizontalAlignment="Left" Height="100" Margin="10,59,0,0" VerticalAlignment="Top" Width="100"/>
+<!--        <TabControl HorizontalAlignment="Left" Height="100" Margin="165,161,0,0" VerticalAlignment="Top" Width="266">-->
+<!--            <TabItem>-->
+<!--                <TabItem.Header>-->
+<!--                    <StackPanel Orientation="Horizontal">-->
+<!--                        <TextBlock>Ilya pidor</TextBlock>-->
+<!--                        <Rectangle Height="10" Width="10" Fill="Black" Margin="3,0,0,0"/>-->
+<!--                    </StackPanel>-->
+<!--                </TabItem.Header>-->
+<!--                <TabItem.Content>-->
+<!--                    <StackPanel>-->
+<!--                        <RadioButton IsChecked="True">iPhone S6</RadioButton>-->
+<!--                        <RadioButton>LG G 4</RadioButton>-->
+<!--                        <RadioButton>Lumia 550</RadioButton>-->
+<!--                    </StackPanel>-->
+<!--                </TabItem.Content>-->
+<!--            </TabItem>-->
+<!--            <TabItem>-->
+<!--                <TabItem.Header>-->
+<!--                    <StackPanel Orientation="Horizontal">-->
+<!--                        <TextBlock>Ilya loh</TextBlock>-->
+<!--                        <Rectangle Height="10" Width="10" Fill="Black" Margin="3,0,0,0"/>-->
+<!--                    </StackPanel>-->
+<!--                </TabItem.Header>-->
+<!--                <TabItem.Content>-->
+<!--                    <StackPanel>-->
+<!--                        <RadioButton IsChecked="False">iPhone S6</RadioButton>-->
+<!--                        <RadioButton>LG G 4</RadioButton>-->
+<!--                    </StackPanel>-->
+<!--                </TabItem.Content>-->
+<!--            </TabItem>-->
+<!--            <TabItem Header="TabItem">-->
+<!--                <Grid Background="#FFE5E5E5"/>-->
+<!--            </TabItem>-->
+<!--            <TabItem Header="TabItem">-->
+<!--                <Grid Background="#FFE5E5E5"/>-->
+<!--            </TabItem>-->
+<!--        </TabControl>-->
+        <TreeView Style="{StaticResource AssemblyInfoTreeViewStyle}">
+            
+            
+        </TreeView>
+
 
     </Grid>
 </Window>
