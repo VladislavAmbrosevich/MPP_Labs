@@ -1,14 +1,6 @@
-﻿using System;
-using System.Collections.Generic;
-using System.ComponentModel;
-using System.Data;
-using System.Drawing;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
+﻿using System.Collections.Generic;
 using System.Windows.Forms;
 using Lab6.Serialization;
-using Lab6.Serialization.Parsing;
 
 namespace Lab6.WindowsForms
 {
@@ -25,12 +17,41 @@ namespace Lab6.WindowsForms
 
             var assemblyNode = TreeViewBuilder.BuildTreeViewFromAssembly(assemblyInfo);
             LoadTreeViewToVisualElement(assemblyNode);
+
+            XmlHandler.SaveTreeViewToXmlFile(trvwAssemblyInfo, @"C:\Users\vambr\Desktop\TreeView.xml");
         }
 
 
         private void LoadTreeViewToVisualElement(List<TreeNode> treeViewNode)
         {
-            treeView1.Nodes.AddRange(treeViewNode.ToArray());
+            trvwAssemblyInfo.Nodes.AddRange(treeViewNode.ToArray());
+        }
+
+        private void trvwAssemblyInfo_AfterSelect(object sender, TreeViewEventArgs e)
+        {
+            OnNodeSelected(e.Node);
+        }
+
+        private void btnEditNode_Click(object sender, System.EventArgs e)
+        {
+            OnEditNodeStarted();
+        }
+
+        private void OnNodeSelected(TreeNode selectedNode)
+        {
+            if (AttributeHandler.CheckIfHasAttributes(selectedNode.Text))
+            {
+                btnEditNode.Enabled = true;
+            }
+            else
+            {
+                btnEditNode.Enabled = false;
+            }
+        }
+
+        private void OnEditNodeStarted()
+        {
+            var attributes = AttributeHandler.ParseStringOnAttributes(trvwAssemblyInfo.SelectedNode.Text);
         }
     }
 }

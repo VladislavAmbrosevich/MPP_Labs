@@ -12,7 +12,7 @@ namespace Lab6.WindowsForms
         {
             var assemblyNode = new List<TreeNode>
             {
-                new TreeNode($"<{XmlNames.AssemblyTag}>", BuildClassNodesCollection(assemblyInfo).ToArray()),
+                new TreeNode($"<{XmlNames.AssemblyTag} {XmlNames.FullNameAttribute}=\"{assemblyInfo.FullName}\">", BuildClassNodesCollection(assemblyInfo).ToArray()),
                 new TreeNode($"</{XmlNames.AssemblyTag}>")
             };
 
@@ -34,7 +34,7 @@ namespace Lab6.WindowsForms
         private static List<TreeNode> BuildClassNode(ParsedTypeInfo classInfo)
         {
             var classNodes = new List<TreeNode>();
-            var classNode = new TreeNode($"<{XmlNames.ClassTag} {XmlNames.NamespaceAttribute}={classInfo.Namespace} {XmlNames.NameAttribute}={classInfo.Name} />");
+            var classNode = new TreeNode($"<{XmlNames.ClassTag} {XmlNames.NamespaceAttribute}=\"{classInfo.Namespace}\" {XmlNames.NameAttribute}=\"{classInfo.Name}\">");
 
 
             var fieldsNode = BuildFieldsTreeNode(classInfo.Fields);
@@ -76,8 +76,8 @@ namespace Lab6.WindowsForms
 
                 foreach (var methodInfo in methods)
                 {
-                    var methodNode = new TreeNode($"<{XmlNames.MethodTag} {XmlNames.NameAttribute}={methodInfo.Name} {XmlNames.AccessModifierAttribute}={methodInfo.AccessModifier} " +
-                                                 $"{XmlNames.ReturnTypeAttribute}={methodInfo.ReturnTypeName}");
+                    var methodNode = new TreeNode($"<{XmlNames.MethodTag} {XmlNames.NameAttribute}=\"{methodInfo.Name}\" {XmlNames.AccessModifierAttribute}=\"{methodInfo.AccessModifier}\" " +
+                                                 $"{XmlNames.ReturnTypeAttribute}=\"{methodInfo.ReturnTypeName}\"");
                     if (methodInfo.Params.Count == 0)
                     {
                         methodNode.Text += @" />";
@@ -107,7 +107,7 @@ namespace Lab6.WindowsForms
             foreach (var parameterInfo in parameters)
             {
                 parametersNodeOpen.Nodes.Add(new TreeNode(
-                    $"<{XmlNames.ParameterTag} {XmlNames.NameAttribute}={parameterInfo.Name} {XmlNames.TypeAttribute}={parameterInfo.TypeName} />"));
+                    $"<{XmlNames.ParameterTag} {XmlNames.NameAttribute}=\"{parameterInfo.Name}\" {XmlNames.TypeAttribute}=\"{parameterInfo.TypeName}\" />"));
             }
             parametersNode.Add(parametersNodeOpen);
             parametersNode.Add(new TreeNode($"</{XmlNames.ParametersTag}>"));
@@ -124,8 +124,8 @@ namespace Lab6.WindowsForms
 
                 foreach (var fieldInfo in fields)
                 {
-                    var fieldNode = new TreeNode($"<{XmlNames.FieldTag} {XmlNames.NameAttribute}={fieldInfo.Name} {XmlNames.AccessModifierAttribute}={fieldInfo.AccessModifier} " +
-                                                 $"{XmlNames.TypeAttribute}={fieldInfo.TypeName} ");
+                    var fieldNode = new TreeNode($"<{XmlNames.FieldTag} {XmlNames.NameAttribute}=\"{fieldInfo.Name}\" {XmlNames.AccessModifierAttribute}=\"{fieldInfo.AccessModifier}\" " +
+                                                 $"{XmlNames.TypeAttribute}=\"{fieldInfo.TypeName}\"");
                     if (fieldInfo.ClassType == null)
                     {
                         fieldNode.Text += @" />";
@@ -158,7 +158,7 @@ namespace Lab6.WindowsForms
                 foreach (var interfaceInfo in interfaces)
                 {
                     interfacesNodeOpen.Nodes.Add(new TreeNode(
-                        $"<{XmlNames.InterfaceTag} {XmlNames.NamespaceAttribute}={interfaceInfo.Namespace} {XmlNames.NameAttribute}={interfaceInfo.Name} />"));
+                        $"<{XmlNames.InterfaceTag} {XmlNames.NamespaceAttribute}=\"{interfaceInfo.Namespace}\" {XmlNames.NameAttribute}=\"{interfaceInfo.Name}\" />"));
                 }
                 interfacesNode.Add(interfacesNodeOpen);
                 interfacesNode.Add(new TreeNode($"</{XmlNames.ImplementedInterfacesTag}>"));
@@ -178,7 +178,7 @@ namespace Lab6.WindowsForms
                 foreach (var classInfo in inheritedClasses)
                 {
                     classesNodeOpen.Nodes.Add(new TreeNode(
-                        $"<{XmlNames.InheritedClassTag} {XmlNames.NamespaceAttribute}={classInfo.Namespace} {XmlNames.NameAttribute}={classInfo.Name} />"));
+                        $"<{XmlNames.InheritedClassTag} {XmlNames.NamespaceAttribute}=\"{classInfo.Namespace}\" {XmlNames.NameAttribute}=\"{classInfo.Name}\" />"));
                 }
                 classesNode.Add(classesNodeOpen);
                 classesNode.Add(new TreeNode($"</{XmlNames.InheritedClassesTag}>"));

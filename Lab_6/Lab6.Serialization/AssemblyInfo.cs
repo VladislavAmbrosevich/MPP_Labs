@@ -7,10 +7,13 @@ namespace Lab6.Serialization
     {
         public List<ParsedTypeInfo> ClassesList { get; set; }
 
+        public string FullName { get; set; }
+
 
         public AssemblyInfo()
         {
             ClassesList = new List<ParsedTypeInfo>();
+            FullName = "";
         }
     }
 }

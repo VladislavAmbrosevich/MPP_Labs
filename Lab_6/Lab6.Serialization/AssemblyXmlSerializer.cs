@@ -35,7 +35,15 @@ namespace Lab6.Serialization
             var xDoc = XDocument.Load(fileName);
 
             var assemblyElement = xDoc.Element(XmlNames.AssemblyTag);
-            assemblyInfo.ClassesList = ParseClassesFromAssemblyElement(assemblyElement);
+            if (assemblyElement != null)
+            {
+                var fullNameAttribute = assemblyElement.Attribute(XmlNames.FullNameAttribute);
+                if (fullNameAttribute != null)
+                {
+                    assemblyInfo.FullName = fullNameAttribute.Value;
+                }
+                assemblyInfo.ClassesList = ParseClassesFromAssemblyElement(assemblyElement);
+            }
 
             return assemblyInfo;
         }

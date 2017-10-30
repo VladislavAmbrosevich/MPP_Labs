@@ -28,94 +28,85 @@
         /// </summary>
         private void InitializeComponent()
         {
-            this.menuStrip1 = new System.Windows.Forms.MenuStrip();
-            this.toolStripMenuItem1 = new System.Windows.Forms.ToolStripMenuItem();
-            this.toolStripMenuItem2 = new System.Windows.Forms.ToolStripMenuItem();
-            this.saveToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
-            this.saveAsToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
-            this.closeToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
-            this.treeView1 = new System.Windows.Forms.TreeView();
-            this.menuStrip1.SuspendLayout();
+            this.trvwAssemblyInfo = new System.Windows.Forms.TreeView();
+            this.btnEditNode = new System.Windows.Forms.Button();
+            this.panel1 = new System.Windows.Forms.Panel();
+            this.drvwAttributes = new System.Windows.Forms.DataGridView();
+            this.Keys = new System.Windows.Forms.DataGridViewTextBoxColumn();
+            this.Values = new System.Windows.Forms.DataGridViewTextBoxColumn();
+            ((System.ComponentModel.ISupportInitialize)(this.drvwAttributes)).BeginInit();
             this.SuspendLayout();
             // 
-            // menuStrip1
+            // trvwAssemblyInfo
             // 
-            this.menuStrip1.Items.AddRange(new System.Windows.Forms.ToolStripItem[] {
-            this.toolStripMenuItem1});
-            this.menuStrip1.Location = new System.Drawing.Point(0, 0);
-            this.menuStrip1.Name = "menuStrip1";
-            this.menuStrip1.Size = new System.Drawing.Size(1328, 24);
-            this.menuStrip1.TabIndex = 0;
-            this.menuStrip1.Text = "menuStrip1";
+            this.trvwAssemblyInfo.Location = new System.Drawing.Point(0, 48);
+            this.trvwAssemblyInfo.Name = "trvwAssemblyInfo";
+            this.trvwAssemblyInfo.Size = new System.Drawing.Size(883, 356);
+            this.trvwAssemblyInfo.TabIndex = 1;
+            this.trvwAssemblyInfo.AfterSelect += new System.Windows.Forms.TreeViewEventHandler(this.trvwAssemblyInfo_AfterSelect);
             // 
-            // toolStripMenuItem1
+            // btnEditNode
             // 
-            this.toolStripMenuItem1.DropDownItems.AddRange(new System.Windows.Forms.ToolStripItem[] {
-            this.toolStripMenuItem2,
-            this.saveToolStripMenuItem,
-            this.saveAsToolStripMenuItem,
-            this.closeToolStripMenuItem});
-            this.toolStripMenuItem1.Name = "toolStripMenuItem1";
-            this.toolStripMenuItem1.Size = new System.Drawing.Size(37, 20);
-            this.toolStripMenuItem1.Text = "File";
+            this.btnEditNode.Location = new System.Drawing.Point(997, 83);
+            this.btnEditNode.Name = "btnEditNode";
+            this.btnEditNode.Size = new System.Drawing.Size(107, 49);
+            this.btnEditNode.TabIndex = 2;
+            this.btnEditNode.Text = "Edit";
+            this.btnEditNode.UseVisualStyleBackColor = true;
+            this.btnEditNode.Click += new System.EventHandler(this.btnEditNode_Click);
             // 
-            // toolStripMenuItem2
+            // panel1
             // 
-            this.toolStripMenuItem2.Name = "toolStripMenuItem2";
-            this.toolStripMenuItem2.Size = new System.Drawing.Size(112, 22);
-            this.toolStripMenuItem2.Text = "Open";
+            this.panel1.Location = new System.Drawing.Point(916, 165);
+            this.panel1.Name = "panel1";
+            this.panel1.Size = new System.Drawing.Size(328, 296);
+            this.panel1.TabIndex = 3;
             // 
-            // saveToolStripMenuItem
+            // drvwAttributes
             // 
-            this.saveToolStripMenuItem.Name = "saveToolStripMenuItem";
-            this.saveToolStripMenuItem.Size = new System.Drawing.Size(112, 22);
-            this.saveToolStripMenuItem.Text = "Save";
+            this.drvwAttributes.ColumnHeadersHeightSizeMode = System.Windows.Forms.DataGridViewColumnHeadersHeightSizeMode.AutoSize;
+            this.drvwAttributes.Columns.AddRange(new System.Windows.Forms.DataGridViewColumn[] {
+            this.Keys,
+            this.Values});
+            this.drvwAttributes.Location = new System.Drawing.Point(415, 444);
+            this.drvwAttributes.Name = "drvwAttributes";
+            this.drvwAttributes.Size = new System.Drawing.Size(364, 106);
+            this.drvwAttributes.TabIndex = 4;
             // 
-            // saveAsToolStripMenuItem
+            // Keys
             // 
-            this.saveAsToolStripMenuItem.Name = "saveAsToolStripMenuItem";
-            this.saveAsToolStripMenuItem.Size = new System.Drawing.Size(112, 22);
-            this.saveAsToolStripMenuItem.Text = "Save as";
+            this.Keys.HeaderText = "Keys";
+            this.Keys.Name = "Keys";
+            this.Keys.ReadOnly = true;
             // 
-            // closeToolStripMenuItem
+            // Values
             // 
-            this.closeToolStripMenuItem.Name = "closeToolStripMenuItem";
-            this.closeToolStripMenuItem.Size = new System.Drawing.Size(112, 22);
-            this.closeToolStripMenuItem.Text = "Close";
-            // 
-            // treeView1
-            // 
-            this.treeView1.Location = new System.Drawing.Point(0, 48);
-            this.treeView1.Name = "treeView1";
-            this.treeView1.Size = new System.Drawing.Size(883, 356);
-            this.treeView1.TabIndex = 1;
+            this.Values.HeaderText = "Values";
+            this.Values.Name = "Values";
             // 
             // Form1
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
-            this.ClientSize = new System.Drawing.Size(1328, 581);
-            this.Controls.Add(this.treeView1);
-            this.Controls.Add(this.menuStrip1);
-            this.MainMenuStrip = this.menuStrip1;
+            this.ClientSize = new System.Drawing.Size(1328, 675);
+            this.Controls.Add(this.drvwAttributes);
+            this.Controls.Add(this.panel1);
+            this.Controls.Add(this.btnEditNode);
+            this.Controls.Add(this.trvwAssemblyInfo);
             this.Name = "Form1";
             this.Text = "Form1";
-            this.menuStrip1.ResumeLayout(false);
-            this.menuStrip1.PerformLayout();
+            ((System.ComponentModel.ISupportInitialize)(this.drvwAttributes)).EndInit();
             this.ResumeLayout(false);
-            this.PerformLayout();
 
         }
 
         #endregion
-
-        private System.Windows.Forms.MenuStrip menuStrip1;
-        private System.Windows.Forms.ToolStripMenuItem toolStripMenuItem1;
-        private System.Windows.Forms.ToolStripMenuItem toolStripMenuItem2;
-        private System.Windows.Forms.ToolStripMenuItem saveToolStripMenuItem;
-        private System.Windows.Forms.ToolStripMenuItem saveAsToolStripMenuItem;
-        private System.Windows.Forms.ToolStripMenuItem closeToolStripMenuItem;
-        private System.Windows.Forms.TreeView treeView1;
+        private System.Windows.Forms.TreeView trvwAssemblyInfo;
+        private System.Windows.Forms.Button btnEditNode;
+        private System.Windows.Forms.Panel panel1;
+        private System.Windows.Forms.DataGridView drvwAttributes;
+        private System.Windows.Forms.DataGridViewTextBoxColumn Keys;
+        private System.Windows.Forms.DataGridViewTextBoxColumn Values;
     }
 }
 
