@@ -31,21 +31,28 @@ namespace Lab6.Serialization
 
         public static AssemblyInfo ParseFromXmlFile(string fileName)
         {
-            var assemblyInfo = new AssemblyInfo();
-            var xDoc = XDocument.Load(fileName);
-
-            var assemblyElement = xDoc.Element(XmlNames.AssemblyTag);
-            if (assemblyElement != null)
+            try
             {
-                var fullNameAttribute = assemblyElement.Attribute(XmlNames.FullNameAttribute);
-                if (fullNameAttribute != null)
-                {
-                    assemblyInfo.FullName = fullNameAttribute.Value;
-                }
-                assemblyInfo.ClassesList = ParseClassesFromAssemblyElement(assemblyElement);
-            }
+                var assemblyInfo = new AssemblyInfo();
+                var xDoc = XDocument.Load(fileName);
 
-            return assemblyInfo;
+                var assemblyElement = xDoc.Element(XmlNames.AssemblyTag);
+                if (assemblyElement != null)
+                {
+                    var fullNameAttribute = assemblyElement.Attribute(XmlNames.FullNameAttribute);
+                    if (fullNameAttribute != null)
+                    {
+                        assemblyInfo.FullName = fullNameAttribute.Value;
+                    }
+                    assemblyInfo.ClassesList = ParseClassesFromAssemblyElement(assemblyElement);
+                }
+
+                return assemblyInfo;
+            }
+            catch (Exception e)
+            {
+                return null;
+            }
         }
 
 

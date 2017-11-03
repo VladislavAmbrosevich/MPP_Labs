@@ -117,25 +117,31 @@ namespace Lab6.WindowsForms
 
         private void OnNewFileLoaded(string fileName, string safeFileName)
         {
-            var tabPage = new TabPage(safeFileName);
-            
-            tabControl1.TabPages.Add(tabPage);
-
-            var treeView = new TreeView();
-            treeView.AfterSelect += (sender, e) =>
-            {
-                _selectedNode = e.Node;
-                OnNodeSelected(_selectedNode);
-            };
-
-            treeView.Parent = tabPage;
-            treeView.Dock = DockStyle.Fill;
-
             var assemblyInfo = AssemblyXmlSerializer.ParseFromXmlFile(fileName);
+            if (assemblyInfo != null)
+            {
+                var tabPage = new TabPage(safeFileName);
 
-            var assemblyNode = TreeViewBuilder.BuildTreeViewFromAssembly(assemblyInfo);
-            LoadTreeViewToVisualElement(treeView, assemblyNode);
+                tabControl1.TabPages.Add(tabPage);
 
+                var treeView = new TreeView();
+                treeView.AfterSelect += (sender, e) =>
+                {
+                    ClearEditAttributesArea();
+                    _selectedNode = e.Node;
+                    OnNodeSelected(_selectedNode);
+                };
+
+                treeView.Parent = tabPage;
+                treeView.Dock = DockStyle.Fill;
+
+                var assemblyNode = TreeViewBuilder.BuildTreeViewFromAssembly(assemblyInfo);
+                LoadTreeViewToVisualElement(treeView, assemblyNode);
+            }
+            else
+            {
+                MessageBox.Show($"Can't open file \"{safeFileName}\".", "Error.", MessageBoxButtons.OK);
+            }
         }
 
         private void openToolStripMenuItem_Click(object sender, System.EventArgs e)
